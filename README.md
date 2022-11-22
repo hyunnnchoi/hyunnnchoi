@@ -1,5 +1,5 @@
 - 👋 Hi, I’m @hyunnnchoi
-- 👀 I’m interested in [Data Engineering](https://github.com/topics/data-engineering, "Data Engineering Link"), [Python](https://github.com/topics/python, "Python Link")
+- 👀 I’m interested in [Data Engineering](https://github.com/topics/data-engineering "Data Engineering Link"), [Python](https://github.com/topics/python "Python Link")
 - 🌱 I’m currently learning Database, Algorithms
 - 💞️ I’m looking to collaborate on ...
 - 📫 How to reach me ...
