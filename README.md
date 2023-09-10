@@ -12,7 +12,7 @@
 <br>
 
 <div align=center>
-	<p>🏆 Baekjoon solved rank 🏆</p>
+	<h3>🏆 Baekjoon solved rank 🏆</h3>
 	
 [![Solved.ac 프로필](http://mazassumnida.wtf/api/mini/generate_badge?boj=chm4332)](https://solved.ac/chm4332)
 </div>
