@@ -18,7 +18,7 @@
 </div>
 
 <div align=left>
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=hyunnnchoi&layout=compact)](https://github.com/hyunnnchoi/github-readme-stats)
+![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=hyunnnchoi&layout=compact)
 
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=hyunnnchoi&show_icons=true&theme=radical)
 
