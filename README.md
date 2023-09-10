@@ -3,7 +3,6 @@
 </div>
 <div align="center">
 	<img src="https://img.shields.io/badge/Swift-F05183?style=flat&logo=Swift&logoColor=white" />
-  
 	<img src="https://img.shields.io/badge/iOS-000000?style=flat&logo=iOS&logoColor=white" />
 	<img src="https://img.shields.io/badge/Python-0769AD?style=flat&logo=Python&logoColor=white" />
 	<br>
