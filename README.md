@@ -24,7 +24,7 @@
 
 </div>
 
-<div align=center>
+<div align=right>
 	
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=hyunnnchoi&show_icons=true&theme=radical)
 </div>
