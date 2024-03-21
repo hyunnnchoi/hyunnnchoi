@@ -1,10 +1,1 @@
-
-<br>
-
-
-[![Solved.ac
-프로필](http://mazassumnida.wtf/api/mini/generate_badge?boj=chm4332)](https://solved.ac/chm4332)
-</div>
-
-<br>
-
+![국보 반가사유상 2점](https://github.com/hyunnnchoi/Linux-Filesystem/assets/37583279/1adba674-940e-45ff-9504-1d77e6750b50)
