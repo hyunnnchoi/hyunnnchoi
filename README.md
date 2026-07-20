@@ -4,6 +4,17 @@
 
 
 #### vllm-project/vllm-metal
+
+<details>
+<summary>Found and fixed silent KV-cache under-reporting for <a href="https://github.com/vllm-project/vllm-metal/pull/529">MLA and YOCO layouts</a> — up to ~half the allocated GPU pool was unreachable, merged into <a href="https://github.com/vllm-project/vllm-metal/releases/tag/v0.3.0.dev20260720105820">v0.3.0.dev</a>.</summary>
+<br>
+`get_kv_cache_spec` advertised a KV layout vllm-metal never allocated. For MLA it emitted a plain `FullAttentionSpec` with a hardcoded 2× K/V page size, even though MLA caches a single latent tensor per layer — so vLLM planned against exactly half the pool. For YOCO it emitted a spec for every layer, even though only the leading layers own a cache. The remaining Metal buffers sat allocated and unreachable — the exact mirror of the over-subscription guard I added in #527.
+<br>
+Fixed by describing the layout that was actually allocated (`MLAAttentionSpec` for MLA; specs only for owning layers for YOCO), leaving the physically-correct byte budget untouched. Validated on real weights : capacity round-tripped 0.500 → 1.000 (MLA) and 0.4286 → 1.000 (YOCO), with max concurrency at 4,096 tokens roughly doubling — 75× → 150× and 123× → 287× — outputs bit-identical before and after.
+</details>
+
+[![PR #529](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm-metal/529)](https://github.com/vllm-project/vllm-metal/pull/529)
+
 <details>
 <summary>Found and fixed a silent out-of-bounds GPU write in <a href="https://github.com/vllm-project/vllm-metal/pull/527">vLLM's Apple Silicon backend</a> — merged into <a href="https://github.com/vllm-project/vllm-metal/releases/tag/v0.3.0.dev20260720064936">v0.3.0.dev</a>.</summary>
 
