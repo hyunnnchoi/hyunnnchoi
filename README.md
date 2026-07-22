@@ -1,8 +1,6 @@
 ## Hi there 👋
 
 
-
-
 #### vllm-project/vllm-metal
 
 <details>
@@ -13,7 +11,6 @@
 Fixed by describing the layout that was actually allocated (`MLAAttentionSpec` for MLA; specs only for owning layers for YOCO), leaving the physically-correct byte budget untouched. Validated on real weights : capacity round-tripped 0.500 → 1.000 (MLA) and 0.4286 → 1.000 (YOCO), with max concurrency at 4,096 tokens roughly doubling — 75× → 150× and 123× → 287× — outputs bit-identical before and after.
 </details>
 
-[![PR #529](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm-metal/529)](https://github.com/vllm-project/vllm-metal/pull/529)
 
 <details>
 <summary>Found and fixed a silent out-of-bounds GPU write in <a href="https://github.com/vllm-project/vllm-metal/pull/527">vLLM's Apple Silicon backend</a> — merged into <a href="https://github.com/vllm-project/vllm-metal/releases/tag/v0.3.0.dev20260720064936">v0.3.0.dev</a>.</summary>
@@ -27,7 +24,17 @@ The result was a silent out-of-bounds GPU write — the server started and repor
 My first contribution to the project.
 </details>
 
-[![PR #527](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm-metal/527)](https://github.com/vllm-project/vllm-metal/pull/527)
+#### vllm-project/vllm-omni
+<details>
+<summary>Found and fixed an <a href="https://github.com/vllm-project/vllm-omni/issues/5295">AR-Diffusion KV pool leak</a> that permanently bricks the DreamZero OpenPI server after a few sessions — <a href="https://github.com/vllm-project/vllm-omni/pull/5296">fix</a> under review.</summary>
+<br>
+Every new `session_id` took AR-Diffusion KV pool blocks that were never released, so four runs of the shipped OpenPI example were enough to exhaust the pool — after which every request failed to allocate, permanently. The process stayed up and `/health` kept returning 200, so a liveness probe never noticed.
+<br>
+A session's blocks are freed only by eviction, and the sole eviction trigger was the `MAX_DREAMZERO_SESSIONS = 64` count cap — chosen independently of pool capacity. The pool floor is one session's window (24 blocks at ~721 MB each on this config), so hitting 64 sessions would need roughly 277 GB of KV pool: the cap is unreachable, and raising `gpu_memory_fraction` only delays the failure.
+<br>
+Fixed by evicting LRU sessions on pool capacity as well as count, so the bound the cap was meant to provide actually holds. Validated on `GEAR-Dreams/DreamZero-DROID`, 1×GB10 (DGX Spark) : 8 consecutive runs of the shipped example clean where run 4 previously died — pool exhaustions 14 → 0, free blocks returning to full every session, action outputs identical to a pre-fix run. Added a regression test that drives session-id churn with the shipped cap unchanged.
+</details>
+
 
 #### lmcache/lmcache
 <details>
@@ -40,4 +47,8 @@ Under heavy cache eviction, `read_file` removed a missing key from the index on 
 Diagnosed the root cause, reported it with the failing code path, and verified the maintainer's fix on A100×4 over a multi-hour repro.
 </details>
 
+[![Issue #5295](https://img.shields.io/github/issues/detail/state/vllm-project/vllm-omni/5295)](https://github.com/vllm-project/vllm-omni/issues/5295)
+[![PR #5296](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm-omni/5296)](https://github.com/vllm-project/vllm-omni/pull/5296)
+[![PR #529](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm-metal/529)](https://github.com/vllm-project/vllm-metal/pull/529)
+[![PR #527](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm-metal/527)](https://github.com/vllm-project/vllm-metal/pull/527)
 [![Issue #2420](https://img.shields.io/github/issues/detail/state/LMCache/LMCache/2420)](https://github.com/LMCache/LMCache/issues/2420)
