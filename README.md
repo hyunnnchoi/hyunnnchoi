@@ -2,7 +2,7 @@
 
 ### Publications
 
-***Accurate Simulation of Distributed Training Jobs with Network Contention Modeling*** — accepted to [IEEE MASCOTS 2026](https://mascots26.iitis.pl/), Genova, Italy (Oct 2026). A GPU-cluster simulator that models distributed-training jobs under dynamic network contention. *Co-first author.*
+***Accurate Simulation of Distributed Training Jobs with Network Contention Modeling*** — accepted to [IEEE MASCOTS 2026](https://mascots26.iitis.pl/), Genova, Italy (Oct 2026). A GPU-cluster simulator that models distributed-training jobs under dynamic network contention. *(Co-first author.)*
 
 ### vllm-project/vllm-metal
 
@@ -50,7 +50,7 @@ Under heavy cache eviction, `read_file` removed a missing key from the index on 
 Diagnosed the root cause, reported it with the failing code path, and verified the maintainer's fix on A100×4 over a multi-hour repro.
 </details>
 
-[![MASCOTS 2026](https://img.shields.io/badge/IEEE%20MASCOTS%202026-accepted-brightgreen)](https://mascots26.iitis.pl/)
+[![MASCOTS 2026](https://img.shields.io/badge/IEEE%20MASCOTS%202026-accepted%20(23%25)-2ea44f)](https://mascots26.iitis.pl/)
 [![Issue #5295](https://img.shields.io/github/issues/detail/state/vllm-project/vllm-omni/5295)](https://github.com/vllm-project/vllm-omni/issues/5295)
 [![PR #5296](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm-omni/5296)](https://github.com/vllm-project/vllm-omni/pull/5296)
 [![PR #529](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm-metal/529)](https://github.com/vllm-project/vllm-metal/pull/529)
