@@ -1,7 +1,10 @@
 ## Hi there 👋
 
+### Publications
 
-#### vllm-project/vllm-metal
+***Accurate Simulation of Distributed Training Jobs with Network Contention Modeling*** — accepted to [IEEE MASCOTS 2026](https://mascots26.iitis.pl/), Genova, Italy (Oct 2026). A GPU-cluster simulator that models distributed-training jobs under dynamic network contention. *Co-first author.*
+
+### vllm-project/vllm-metal
 
 <details>
 <summary>Found and fixed silent KV-cache under-reporting for <a href="https://github.com/vllm-project/vllm-metal/pull/529">MLA and YOCO layouts</a> — up to ~half the allocated GPU pool was unreachable, merged into <a href="https://github.com/vllm-project/vllm-metal/releases/tag/v0.3.0.dev20260720105820">v0.3.0.dev</a>.</summary>
@@ -24,7 +27,7 @@ The result was a silent out-of-bounds GPU write — the server started and repor
 My first contribution to the project.
 </details>
 
-#### vllm-project/vllm-omni
+### vllm-project/vllm-omni
 <details>
 <summary>Found and fixed an <a href="https://github.com/vllm-project/vllm-omni/issues/5295">AR-Diffusion KV pool leak</a> that permanently bricks the DreamZero OpenPI server after a few sessions — <a href="https://github.com/vllm-project/vllm-omni/pull/5296">fix</a> under review.</summary>
 <br>
@@ -36,7 +39,7 @@ Fixed by evicting LRU sessions on pool capacity as well as count, so the bound t
 </details>
 
 
-#### lmcache/lmcache
+### lmcache/lmcache
 <details>
 <summary>Found and reported a race-condition crash in <a href="https://github.com/LMCache/LMCache/issues/2420">LMCache</a>'s local disk backend.</summary>
 
@@ -47,6 +50,7 @@ Under heavy cache eviction, `read_file` removed a missing key from the index on 
 Diagnosed the root cause, reported it with the failing code path, and verified the maintainer's fix on A100×4 over a multi-hour repro.
 </details>
 
+[![MASCOTS 2026](https://img.shields.io/badge/IEEE%20MASCOTS%202026-accepted-brightgreen)](https://mascots26.iitis.pl/)
 [![Issue #5295](https://img.shields.io/github/issues/detail/state/vllm-project/vllm-omni/5295)](https://github.com/vllm-project/vllm-omni/issues/5295)
 [![PR #5296](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm-omni/5296)](https://github.com/vllm-project/vllm-omni/pull/5296)
 [![PR #529](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm-metal/529)](https://github.com/vllm-project/vllm-metal/pull/529)
