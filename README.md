@@ -2,9 +2,17 @@
 
 ### Publications
 
-***Accurate Simulation of Distributed Training Jobs with Network Contention Modeling*** — accepted to [IEEE MASCOTS 2026](https://mascots26.iitis.pl/), Genova, Italy (Oct 2026). A GPU-cluster simulator that models distributed-training jobs under dynamic network contention. *(Co-first author.)*
+***Accurate Simulation of Distributed Training Jobs with Network Contention Modeling*** — accepted to [IEEE MASCOTS 2026](https://mascots26.iitis.pl/), Genova, Italy (Oct 2026). A GPU-cluster simulator that models distributed-training jobs under dynamic network contention. *(Co-first author.)* [[code](https://github.com/OSSS-KU/MoSim)]
 
 ### vllm-project/vllm-metal
+
+<details>
+<summary>Found and closed a silent no-op in <a href="https://github.com/vllm-project/vllm-metal/pull/747">--kv-cache-dtype</a> — quantized KV dtypes were accepted and logged as a memory saving while the pool stayed in the model dtype,  <a href="https://github.com/vllm-project/vllm-metal/commit/d990b3e">merged</a>.</summary>
+<br>
+`fp8`, `fp8_e5m2`, `int8_per_token_head`, `int4_per_token_head` and `nvfp4*` all fell straight through `check_and_update_config`. vLLM core printed its "reduces the GPU memory footprint" line and the server came up healthy, while the paged KV cache stayed allocated in the model dtype. Only `turboquant_*` was rejected, and only incidentally, by an unrelated guard. So the flag users reach for to halve KV memory did nothing and logged the opposite.
+<br>
+Fixed by rejecting the unsupported names next to that guard, with a `NotImplementedError` pointing at `--kv-cache-dtype auto` or TurboQuant; `auto`, `float16` and `bfloat16` untouched. Verified on an M1 Max (vLLM 0.29.0, MLX 0.32.1): `auto` still allocates 46,401 blocks × 196,608 B, and `fp8` — which previously allocated that same pool while advertising a saving — now fails at startup with actionable text. Four regression cases fail on main and pass here.
+</details>
 
 <details>
 <summary>Found and fixed silent KV-cache under-reporting for <a href="https://github.com/vllm-project/vllm-metal/pull/529">MLA and YOCO layouts</a> — up to ~half the allocated GPU pool was unreachable, merged into <a href="https://github.com/vllm-project/vllm-metal/releases/tag/v0.3.0.dev20260720105820">v0.3.0.dev</a>.</summary>
@@ -17,13 +25,9 @@ Fixed by describing the layout that was actually allocated (`MLAAttentionSpec` f
 
 <details>
 <summary>Found and fixed a silent out-of-bounds GPU write in <a href="https://github.com/vllm-project/vllm-metal/pull/527">vLLM's Apple Silicon backend</a> — merged into <a href="https://github.com/vllm-project/vllm-metal/releases/tag/v0.3.0.dev20260720064936">v0.3.0.dev</a>.</summary>
-
 <br>
-
 `--num-gpu-blocks-override` was honored by the vLLM scheduler but never reached vllm-metal's paged KV allocator, so an override above the profiled capacity let the engine address blocks that were never allocated on the Metal side.
-
 The result was a silent out-of-bounds GPU write — the server started and reported healthy while the scheduler oversubscribed the pool. Added fail-fast validation that rejects any engine KV config larger than the allocated pool.
-
 My first contribution to the project.
 </details>
 
@@ -51,6 +55,7 @@ Diagnosed the root cause, reported it with the failing code path, and verified t
 </details>
 
 [![MASCOTS 2026](https://img.shields.io/badge/IEEE%20MASCOTS%202026-accepted%20(23%25)-2ea44f)](https://mascots26.iitis.pl/)
+[![PR #747](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm-metal/747)](https://github.com/vllm-project/vllm-metal/pull/747)
 [![Issue #5295](https://img.shields.io/github/issues/detail/state/vllm-project/vllm-omni/5295)](https://github.com/vllm-project/vllm-omni/issues/5295)
 [![PR #5296](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm-omni/5296)](https://github.com/vllm-project/vllm-omni/pull/5296)
 [![PR #529](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm-metal/529)](https://github.com/vllm-project/vllm-metal/pull/529)
