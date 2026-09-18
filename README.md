@@ -2,7 +2,7 @@
 
 ### Publications
 
-**Accurate Simulation of Distributed Training Jobs with Network Contention Modeling**, IEEE MASCOTS 2026 (Genova, Italy, Oct 2026), co-first author. A GPU cluster simulator for distributed training jobs under dynamic network contention. [[code](https://github.com/OSSS-KU/MoSim)]
+**Accurate Simulation of Distributed Training Jobs with Network Contention Modeling**, **[IEEE MASCOTS 2026](https://mascots26.iitis.pl/)** (Genova, Italy, Oct 2026, acceptance rate 23%), co-first author. A GPU cluster simulator for distributed training jobs under dynamic network contention. [[code](https://github.com/OSSS-KU/MoSim)]
 
 ### Open source
 
