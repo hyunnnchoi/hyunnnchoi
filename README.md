@@ -22,7 +22,7 @@
 
 ### In review
 
-- vllm-project/vllm: KV offload load path ([#57343](https://github.com/vllm-project/vllm/pull/57343), [#57569](https://github.com/vllm-project/vllm/pull/57569))
+- vllm-project/vllm: KV offload load path ([#57343](https://github.com/vllm-project/vllm/pull/57343), [#57569](https://github.com/vllm-project/vllm/pull/57569)), KV tensor shape bugfix ([#59999](https://github.com/vllm-project/vllm/pull/59999), [#60005](https://github.com/vllm-project/vllm/pull/60005))
 - vllm-project/vllm-omni: GR00T-N1.7 request-level batching ([#6568](https://github.com/vllm-project/vllm-omni/pull/6568)) and compile setup for the action head ([#6450](https://github.com/vllm-project/vllm-omni/pull/6450))
 
 [![MASCOTS 2026](https://img.shields.io/badge/IEEE%20MASCOTS%202026-accepted%20(23%25)-2ea44f)](https://mascots26.iitis.pl/)
