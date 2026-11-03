@@ -8,10 +8,11 @@
 
 **[vllm-project/vllm](https://github.com/vllm-project/vllm)**
 
-- [#59999](https://github.com/vllm-project/vllm/pull/59999): Found a mismatch between the LHBNC KV layout and the FlashInfer attention backend, and prevented the startup crash it caused. Merged.
-- [#60005](https://github.com/vllm-project/vllm/pull/60005): Found the same layout silently corrupting CPU KV offload, and blocked it at startup. In review.
 - [#57343](https://github.com/vllm-project/vllm/pull/57343): Made the KV load path follow the actual copy size instead of the page size, cutting CPU prefix-hit TTFT from 88 to 46 ms. In review.
 - [#57569](https://github.com/vllm-project/vllm/pull/57569): Added an opt-in calibration that sets the DMA/Triton load cutoff per GPU instead of using constants tuned on one H100. Stacked on #57343, in review.
+- [#59999](https://github.com/vllm-project/vllm/pull/59999): Found a mismatch between the LHBNC KV layout and the FlashInfer attention backend, and prevented the startup crash it caused. Merged.
+- [#60005](https://github.com/vllm-project/vllm/pull/60005): Found the same layout silently corrupting CPU KV offload, and blocked it at startup. In review.
+
   
 **[vllm-project/vllm-metal](https://github.com/vllm-project/vllm-metal)** (vLLM on Apple Silicon)
 
