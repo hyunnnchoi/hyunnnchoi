@@ -6,6 +6,13 @@
 
 ### Open source
 
+**[vllm-project/vllm](https://github.com/vllm-project/vllm)**
+
+- [#59999](https://github.com/vllm-project/vllm/pull/59999): Found a mismatch between the LHBNC KV layout and the FlashInfer attention backend, and prevented the startup crash it caused. Merged.
+- [#60005](https://github.com/vllm-project/vllm/pull/60005): Found the same layout silently corrupting CPU KV offload, and blocked it at startup. In review.
+- [#57343](https://github.com/vllm-project/vllm/pull/57343): Made the KV load path follow the actual copy size instead of the page size, cutting CPU prefix-hit TTFT from 88 to 46 ms. In review.
+- [#57569](https://github.com/vllm-project/vllm/pull/57569): Added an opt-in calibration that sets the DMA/Triton load cutoff per GPU instead of using constants tuned on one H100. Stacked on #57343, in review.
+  
 **[vllm-project/vllm-metal](https://github.com/vllm-project/vllm-metal)** (vLLM on Apple Silicon)
 
 - [#747](https://github.com/vllm-project/vllm-metal/pull/747): `--kv-cache-dtype fp8` and the other quantized dtypes were accepted and logged as a memory saving, but the KV pool was still allocated in the model dtype. They are now rejected at startup with a pointer to the options that do work. Merged.
@@ -26,7 +33,8 @@
 - vllm-project/vllm-omni: GR00T-N1.7 request-level batching ([#6568](https://github.com/vllm-project/vllm-omni/pull/6568)) and compile setup for the action head ([#6450](https://github.com/vllm-project/vllm-omni/pull/6450))
 
 [![MASCOTS 2026](https://img.shields.io/badge/IEEE%20MASCOTS%202026-accepted%20(23%25)-2ea44f)](https://mascots26.iitis.pl/)
-[![PR #747](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm-metal/747)](https://github.com/vllm-project/vllm-metal/pull/747)
-[![PR #529](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm-metal/529)](https://github.com/vllm-project/vllm-metal/pull/529)
-[![PR #527](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm-metal/527)](https://github.com/vllm-project/vllm-metal/pull/527)
-[![Issue #2420](https://img.shields.io/github/issues/detail/state/LMCache/LMCache/2420)](https://github.com/LMCache/LMCache/issues/2420)
+[![vLLM #59999](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm/59999)](https://github.com/vllm-project/vllm/pull/59999)
+[![vLLM-metal #747](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm-metal/747)](https://github.com/vllm-project/vllm-metal/pull/747)
+[![vLLM-metal #529](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm-metal/529)](https://github.com/vllm-project/vllm-metal/pull/529)
+[![vLLM-metal #527](https://img.shields.io/github/pulls/detail/state/vllm-project/vllm-metal/527)](https://github.com/vllm-project/vllm-metal/pull/527)
+[![LMCache #2420](https://img.shields.io/github/issues/detail/state/LMCache/LMCache/2420)](https://github.com/LMCache/LMCache/issues/2420)
